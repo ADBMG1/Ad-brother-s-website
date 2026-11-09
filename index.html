@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>AD Brothers Media Group - Fast Music Distribution Network</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --wb-accent: #00F0FF;
+      --wb-accent-glow: #7C3AED;
+      --wb-bg: #030712;
+      --wb-surface: #0B132B;
+      --wb-card: #111B3C;
+      --wb-border: #1E293B;
+      --wb-text: #F8FAFC;
+      --wb-text-muted: #94A3B8;
+      --wb-text-dim: #64748B;
+      --wb-success: #10B981;
+      --wb-danger: #EF4444;
+      --nav-height: 64px;
+    }
+
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      -webkit-tap-highlight-color: transparent; 
+    }
+    
+    html { 
+      scroll-behavior: smooth; 
+    }
+    
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      background-color: var(--wb-bg); 
+      color: var(--wb-text); 
+      line-height: 1.5; 
+      overflow-x: hidden; 
+      -webkit-font-smoothing: antialiased; 
+    }
+
+    /* NAVIGATION */
+    .brand-navbar { 
+      position: sticky; 
+      top: 0; 
+      width: 100%; 
+      height: var(--nav-height); 
+      background: rgba(3, 7, 18, 0.90); 
+      backdrop-filter: blur(14px); 
+      border-bottom: 1px solid var(--wb-border); 
+      z-index: 100000; 
+      display: flex; 
+      align-items: center; 
+      padding: 0 16px; 
+    }
+    
+    .nav-container { 
+      width: 100%; 
+      max-width: 1120px; 
+      margin: 0 auto; 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+    }
+    
+    .brand-logo-area { 
+      display: flex; 
+      align-items: center; 
+      gap: 10px; 
+      text-decoration: none; 
+      position: relative;
+      z-index: 100001;
+      flex-grow: 1;
+      max-width: calc(100% - 50px);
+    }
+    
+    .brand-logo-img { 
+      height: 34px; 
+      width: auto; 
+      border-radius: 6px; 
+      flex-shrink: 0;
+    }
+
+    .brand-text-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+    }
+    
+    .brand-name { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: clamp(12px, 3.8vw, 15px); 
+      font-weight: 800; 
+      color: #FFFFFF; 
+      line-height: 1.1; 
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .brand-name span { 
+      color: var(--wb-accent); 
+    }
+    
+    .brand-tag { 
+      font-size: clamp(8px, 2.5vw, 10px); 
+      letter-spacing: 1.8px; 
+      text-transform: uppercase; 
+      color: #FFFFFF; 
+      font-weight: 700; 
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    .nav-actions { 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+      position: relative;
+      z-index: 100001;
+      flex-shrink: 0;
+    }
+    
+    .menu-toggle-btn { 
+      background: var(--wb-surface); 
+      color: var(--wb-text); 
+      border: 1px solid var(--wb-border); 
+      width: 40px; 
+      height: 40px; 
+      border-radius: 12px; 
+      cursor: pointer; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 18px; 
+    }
+
+    /* NAVIGATION DRAWER */
+    .adv-nav-overlay { 
+      position: fixed; 
+      inset: 0; 
+      background: rgba(3, 7, 18, 0.98); 
+      backdrop-filter: blur(20px); 
+      z-index: 99999999; 
+      display: none; 
+      flex-direction: column; 
+      padding: 16px; 
+      overflow-y: auto; 
+    }
+    
+    .adv-nav-overlay.active { 
+      display: flex; 
+    }
+    
+    .nav-head-strip { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      padding-bottom: 14px; 
+      border-bottom: 1px solid var(--wb-border); 
+      margin-bottom: 16px; 
+    }
+    
+    .close-nav-btn { 
+      background: var(--wb-surface); 
+      color: var(--wb-text); 
+      border: 1px solid var(--wb-border); 
+      width: 38px; 
+      height: 38px; 
+      border-radius: 12px; 
+      cursor: pointer; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 17px; 
+    }
+
+    .nav-sections-grid { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 16px; 
+      margin-bottom: 20px; 
+    }
+    
+    .nav-col-title { 
+      font-size: 11px; 
+      font-weight: 700; 
+      color: var(--wb-accent); 
+      text-transform: uppercase; 
+      letter-spacing: 1px; 
+      margin-bottom: 8px; 
+      display: flex; 
+      align-items: center; 
+      gap: 6px; 
+    }
+    
+    .nav-link-item { 
+      display: flex; 
+      align-items: center; 
+      gap: 12px; 
+      background: var(--wb-surface); 
+      border: 1px solid var(--wb-border); 
+      padding: 13px 16px; 
+      border-radius: 12px; 
+      color: var(--wb-text); 
+      text-decoration: none; 
+      font-size: 14px; 
+      font-weight: 600; 
+      margin-bottom: 8px; 
+      cursor: pointer; 
+    }
+    
+    .nav-link-item i { 
+      font-size: 16px; 
+      color: var(--wb-accent); 
+      width: 20px; 
+      text-align: center; 
+    }
+
+    .floating-wa { 
+      position: fixed; 
+      bottom: 18px; 
+      right: 18px; 
+      background: #25D366; 
+      color: #fff; 
+      width: 52px; 
+      height: 52px; 
+      border-radius: 50%; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 26px; 
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4); 
+      z-index: 850; 
+      text-decoration: none; 
+    }
+
+    .container { 
+      width: 100%; 
+      max-width: 1120px; 
+      margin: 0 auto; 
+      padding: 0 16px; 
+    }
+
+    /* HERO */
+    .hero { 
+      text-align: center; 
+      padding: 35px 0 20px; 
+    }
+    
+    .brand-hero-badge { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 6px; 
+      background: rgba(0, 240, 255, 0.1); 
+      border: 1px solid rgba(0, 240, 255, 0.3); 
+      padding: 6px 16px; 
+      border-radius: 50px; 
+      font-size: 11px; 
+      font-weight: 700; 
+      color: var(--wb-accent); 
+      letter-spacing: 0.8px; 
+      text-transform: uppercase; 
+      margin-bottom: 14px; 
+    }
+
+    .hero h1 { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: clamp(24px, 5.5vw, 42px); 
+      line-height: 1.25; 
+      font-weight: 800; 
+      margin-bottom: 14px; 
+      color: #FFFFFF; 
+    }
+    
+    /* SLIDING SERVICES ANIMATION BOX */
+    .sliding-sub-box { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: clamp(14px, 3.5vw, 18px); 
+      font-weight: 700; 
+      color: #FFFFFF; 
+      margin-bottom: 16px; 
+      height: 46px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 8px; 
+      background: var(--wb-surface);
+      border: 1px solid var(--wb-border);
+      border-radius: 14px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+      padding: 0 16px; 
+    }
+    
+    .sliding-track {
+      display: inline-block;
+      position: relative;
+      height: 100%;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+
+    .slide-item {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease-in-out;
+      color: var(--wb-accent);
+    }
+
+    .slide-item.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero p { 
+      max-width: 640px; 
+      margin: 0 auto 18px; 
+      font-size: 13.5px; 
+      color: var(--wb-text-muted); 
+      line-height: 1.6; 
+    }
+
+    /* SQUIRCLE AVATARS */
+    .social-proof-strip-large { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      gap: 8px; 
+      background: var(--wb-surface); 
+      border: 1px solid var(--wb-border); 
+      padding: 16px 20px; 
+      border-radius: 20px; 
+      max-width: 440px; 
+      margin: 0 auto 18px; 
+    }
+    
+    .avatar-stack-large { 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+    }
+    
+    .avatar-stack-large img { 
+      width: 48px; 
+      height: 48px; 
+      border-radius: 14px; 
+      border: 2.5px solid var(--wb-surface); 
+      margin-left: -8px; 
+      object-fit: cover; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); 
+    }
+    
+    .avatar-stack-large img:first-child { 
+      margin-left: 0; 
+      border-color: var(--wb-accent); 
+    }
+
+    .stars-row { 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 4px; 
+      color: #38BDF8; 
+      font-size: 13px; 
+    }
+    
+    .rating-number { 
+      color: #FFFFFF; 
+      font-weight: 700; 
+      font-size: 13px; 
+      margin-left: 6px; 
+    }
+    
+    .social-subtext { 
+      font-size: 11.5px; 
+      color: var(--wb-text-muted); 
+      text-align: center; 
+    }
+
+    /* SHIFT CALCULATOR STRIP */
+    .delivery-clock-card { 
+      background: rgba(239, 68, 68, 0.12); 
+      border: 1px dashed rgba(239, 68, 68, 0.5); 
+      border-radius: 14px; 
+      padding: 12px 16px; 
+      font-size: 12px; 
+      color: #FCA5A5; 
+      max-width: 530px; 
+      margin: 0 auto 18px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 8px; 
+      font-weight: 700; 
+      text-align: center; 
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.15);
+    }
+    
+    .status-dot { 
+      width: 8px; 
+      height: 8px; 
+      border-radius: 50%; 
+      background: var(--wb-success); 
+      display: inline-block; 
+      flex-shrink: 0; 
+    }
+    
+    .status-dot.off { 
+      background: var(--wb-danger); 
+      box-shadow: 0 0 8px var(--wb-danger);
+    }
+
+    /* METRICS */
+    .metrics-counter-grid { 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 10px; 
+      max-width: 520px; 
+      margin: 0 auto 20px; 
+    }
+    
+    .metric-chip { 
+      background: var(--wb-surface); 
+      border: 1px solid var(--wb-border); 
+      border-radius: 16px; 
+      padding: 14px 8px; 
+      text-align: center; 
+    }
+    
+    .metric-num { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: 18px; 
+      font-weight: 800; 
+      color: #FFFFFF; 
+      line-height: 1; 
+      margin-bottom: 4px; 
+    }
+    
+    .metric-num span { 
+      color: var(--wb-accent); 
+    }
+    
+    .metric-lbl { 
+      font-size: 10px; 
+      color: var(--wb-text-dim); 
+      font-weight: 600; 
+      text-transform: uppercase; 
+    }
+
+    .hero-btns { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 12px; 
+      max-width: 380px; 
+      margin: 0 auto 20px; 
+    }
+    
+    @media (min-width: 520px) { 
+      .hero-btns { 
+        flex-direction: row; 
+        justify-content: center; 
+      } 
+    }
+    
+    .btn { 
+      padding: 13px 22px; 
+      border-radius: 14px; 
+      font-size: 13px; 
+      font-weight: 700; 
+      text-decoration: none; 
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 8px; 
+      cursor: pointer; 
+      border: 1px solid transparent; 
+    }
+    
+    .btn-wavbee { 
+      background: linear-gradient(135deg, var(--wb-accent-glow) 0%, var(--wb-accent) 100%); 
+      color: #FFFFFF; 
+      box-shadow: 0 8px 25px rgba(0, 240, 255, 0.35); 
+      font-weight: 800;
+    }
+    
+    .btn-outline { 
+      background: var(--wb-surface); 
+      color: var(--wb-text); 
+      border-color: var(--wb-border); 
+    }
+
+    /* TRUST STRIP */
+    .trust-strip { 
+      display: flex; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+      gap: 8px 14px; 
+      padding: 14px; 
+      background: var(--wb-surface); 
+      border-radius: 16px; 
+      border: 1px solid var(--wb-border); 
+      margin-bottom: 26px; 
+    }
+    
+    .trust-item { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 6px; 
+      font-size: 11.5px; 
+      color: var(--wb-text-muted); 
+    }
+    
+    .trust-item i { 
+      color: var(--wb-accent); 
+    }
+
+    /* REGIONAL MARKET STRIP */
+    .market-strip { 
+      background: var(--wb-surface); 
+      border: 1px solid var(--wb-border); 
+      border-radius: 18px; 
+      padding: 18px; 
+      margin-bottom: 34px; 
+      text-align: center; 
+    }
+    
+    .market-title { 
+      color: var(--wb-accent); 
+      font-weight: 800; 
+      font-size: 12.5px; 
+      text-transform: uppercase; 
+      letter-spacing: 0.5px; 
+    }
+    
+    .region-tags { 
+      display: flex; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+      gap: 8px; 
+      margin-top: 12px; 
+    }
+    
+    .region-pill { 
+      background: var(--wb-card); 
+      border: 1px solid var(--wb-border); 
+      padding: 6px 14px; 
+      border-radius: 16px; 
+      font-size: 11.5px; 
+      font-weight: 600; 
+      color: var(--wb-text); 
+    }
+
+    /* PLATFORMS SLIDER */
+    .slider-section { 
+      text-align: center; 
+      margin-bottom: 40px; 
+    }
+    
+    .platforms-tagline { 
+      font-size: 11px; 
+      font-weight: 800; 
+      letter-spacing: 1.5px; 
+      text-transform: uppercase; 
+      color: var(--wb-accent); 
+      margin-bottom: 6px; 
+    }
+    
+    .slider-section h2 { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: clamp(22px, 4.8vw, 30px); 
+      font-weight: 700; 
+      margin-bottom: 8px; 
+      color: #FFFFFF; 
+    }
+    
+    .slider-section p { 
+      color: var(--wb-text-muted); 
+      font-size: 13px; 
+      max-width: 580px; 
+      margin: 0 auto 20px; 
+    }
+    
+    .marquee-wrapper { 
+      position: relative; 
+      width: 100%; 
+      overflow: hidden; 
+      padding: 10px 0; 
+      mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%); 
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%); 
+    }
+    
+    .marquee-track { 
+      display: flex; 
+      gap: 12px; 
+      width: max-content; 
+      animation: marqueeScroll 22s linear infinite; 
+    }
+    
+    .marquee-track.reverse { 
+      animation: marqueeScrollRev 24s linear infinite; 
+      margin-top: 10px; 
+    }
+    
+    @keyframes marqueeScroll { 
+      0% { transform: translateX(0); } 
+      100% { transform: translateX(-50%); } 
+    }
+    
+    @keyframes marqueeScrollRev { 
+      0% { transform: translateX(-50%); } 
+      100% { transform: translateX(0); } 
+    }
+    
+    .store-badge { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 8px; 
+      background: var(--wb-surface); 
+      border: 1px solid var(--wb-border); 
+      border-radius: 14px; 
+      padding: 10px 18px; 
+      font-size: 13px; 
+      font-weight: 600; 
+      color: var(--wb-text); 
+      white-space: nowrap; 
+    }
+    
+    .store-badge i { 
+      font-size: 16px; 
+      color: var(--wb-accent); 
+    }
+
+    /* SECTION TITLES */
+    .section-title { 
+      text-align: center; 
+      margin-bottom: 22px; 
+    }
+    
+    .section-title h2 { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: clamp(20px, 4.5vw, 26px); 
+      font-weight: 700; 
+      color: #FFFFFF; 
+      margin-bottom: 4px; 
+    }
+    
+    .section-title p { 
+      color: var(--wb-text-muted); 
+      font-size: 12.5px; 
+    }
+
+    /* SERVICES GRID */
+    .services-grid { 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 16px; 
+      margin-bottom: 36px; 
+    }
+    
+    @media (min-width: 640px) { 
+      .services-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+      } 
+    }
+    
+    @media (min-width: 1024px) { 
+      .services-grid { 
+        grid-template-columns: repeat(3, 1fr); 
+      } 
+    }
+    
+    .service-card { 
+      background: var(--wb-surface); 
+      border: 1px solid var(--wb-border); 
+      border-radius: 20px; 
+      padding: 22px 18px; 
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    }
+    
+    .icon-box { 
+      width: 44px; 
+      height: 44px; 
+      border-radius: 12px; 
+      background: rgba(0, 240, 255, 0.1); 
+      border: 1px solid rgba(0, 240, 255, 0.3); 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 18px; 
+      color: var(--wb-accent); 
+      margin-bottom: 14px; 
+    }
+    
+    .service-card h3 { 
+      font-size: 15px; 
+      font-weight: 800; 
+      color: #FFFFFF; 
+      margin-bottom: 6px; 
+    }
+    
+    .service-card p { 
+      font-size: 12px; 
+      color: var(--wb-text-muted); 
+      margin-bottom: 14px; 
+      line-height: 1.5; 
+    }
+    
+    .service-detail-list { 
+      list-style: none; 
+      font-size: 11.5px; 
+      color: var(--wb-text); 
+    }
+    
+    .service-detail-list li { 
+      margin-bottom: 6px; 
+      display: flex; 
+      align-items: center; 
+      gap: 6px; 
+    }
+    
+    .service-detail-list li i { 
+      color: var(--wb-accent); 
+      font-size: 10px; 
+    }
+
+    /* REVIEWS SECTION */
+    .reviews-section { 
+      padding: 10px 0 35px; 
+    }
+    
+    .reviews-grid { 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 16px; 
+    }
+    
+    @media (min-width: 640px) { 
+      .reviews-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+      } 
+    }
+    
+    @media (min-width: 1024px) { 
+      .reviews-grid { 
+        grid-template-columns: repeat(3, 1fr); 
+      } 
+    }
+    
+    .review-card { 
+      background: var(--wb-surface); 
+      border: 1px solid var(--wb-border); 
+      border-radius: 20px; 
+      padding: 20px; 
+      display: flex; 
+      flex-direction: column; 
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    }
+    
+    .review-header { 
+      display: flex; 
+      align-items: center; 
+      gap: 12px; 
+      margin-bottom: 12px; 
+    }
+    
+    .review-header img { 
+      width: 48px; 
+      height: 48px; 
+      border-radius: 14px; 
+      object-fit: cover; 
+      border: 1px solid var(--wb-border); 
+    }
+    
+    .review-header h4 { 
+      font-size: 14px; 
+      font-weight: 800; 
+      color: #FFFFFF; 
+      line-height: 1.2; 
+    }
+    
+    .client-role { 
+      font-size: 11px; 
+      color: var(--wb-accent); 
+      font-weight: 700; 
+    }
+    
+    .review-card .rating-tag { 
+      display: flex; 
+      align-items: center; 
+      gap: 4px; 
+      font-size: 12px; 
+      font-weight: 700; 
+      color: #FFFFFF; 
+      margin-bottom: 8px; 
+    }
+    
+    .review-card .rating-tag .stars { 
+      color: #38BDF8; 
+      font-size: 11px; 
+      display: flex; 
+      gap: 2px; 
+    }
+    
+    .review-card p { 
+      font-size: 12px; 
+      color: var(--wb-text-muted); 
+      line-height: 1.5; 
+    }
+
+    /* ABOUT COMPANY & FOUNDER */
+    .about-wrap { 
+      background: var(--wb-surface); 
+      border: 1px solid var(--wb-border); 
+      border-radius: 22px; 
+      padding: 24px 20px; 
+      margin-bottom: 34px; 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 20px; 
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25); 
+    }
+    
+    @media (min-width: 800px) { 
+      .about-wrap { 
+        grid-template-columns: 1.2fr 1fr; 
+        padding: 28px; 
+      } 
+    }
+    
+    .abt-badge { 
+      font-size: 10px; 
+      font-weight: 800; 
+      color: var(--wb-accent); 
+      text-transform: uppercase; 
+      letter-spacing: 0.8px; 
+      margin-bottom: 6px; 
+      display: inline-block; 
+    }
+    
+    .about-wrap h2 { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: 22px; 
+      margin-bottom: 10px; 
+      color: #FFFFFF; 
+    }
+    
+    .about-wrap p { 
+      color: var(--wb-text-muted); 
+      font-size: 12.5px; 
+      line-height: 1.6; 
+      margin-bottom: 8px; 
+    }
+
+    .founder-box { 
+      background: var(--wb-card); 
+      border: 1px solid var(--wb-border); 
+      border-left: 4px solid var(--wb-accent); 
+      border-radius: 16px; 
+      padding: 18px; 
+    }
+    
+    .founder-badge { 
+      display: inline-block; 
+      background: rgba(0, 240, 255, 0.1); 
+      color: var(--wb-accent); 
+      font-size: 9px; 
+      font-weight: 800; 
+      padding: 3px 8px; 
+      border-radius: 6px; 
+      margin-bottom: 8px; 
+      text-transform: uppercase; 
+      border: 1px solid rgba(0, 240, 255, 0.3); 
+    }
+    
+    .founder-name { 
+      font-size: 17px; 
+      font-weight: 800; 
+      color: #FFFFFF; 
+    }
+    
+    .founder-title { 
+      font-size: 12px; 
+      color: var(--wb-accent); 
+      margin-bottom: 8px; 
+      font-weight: 700; 
+    }
+    
+    .founder-desc { 
+      font-size: 12px; 
+      color: var(--wb-text-muted); 
+      line-height: 1.5; 
+      margin-bottom: 12px; 
+    }
+    
+    .founder-quote-box { 
+      background: rgba(0, 240, 255, 0.05); 
+      border: 1px solid rgba(0, 240, 255, 0.2); 
+      border-radius: 12px; 
+      padding: 12px 14px; 
+      font-size: 12px; 
+      color: #38BDF8; 
+      font-style: italic; 
+      line-height: 1.5; 
+      font-weight: 600; 
+    }
+
+    /* CTA BANNER */
+    .cta-banner { 
+      background: var(--wb-surface); 
+      border: 1px solid rgba(0, 240, 255, 0.3); 
+      border-radius: 22px; 
+      padding: 28px 20px; 
+      text-align: center; 
+      margin-bottom: 28px; 
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3); 
+    }
+    
+    .cta-banner h2 { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: clamp(19px, 4.5vw, 24px); 
+      font-weight: 800; 
+      margin-bottom: 8px; 
+      color: #FFFFFF; 
+    }
+    
+    .cta-banner p { 
+      color: var(--wb-text-muted); 
+      font-size: 12.5px; 
+      max-width: 520px; 
+      margin: 0 auto 18px; 
+    }
+
+    footer { 
+      border-top: 1px solid var(--wb-border); 
+      padding: 24px 16px; 
+      text-align: center; 
+      background: #010309; 
+    }
+    
+    .footer-brand { 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 8px; 
+      margin-bottom: 8px; 
+    }
+    
+    .footer-brand span { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: 14px; 
+      font-weight: 800; 
+      color: #FFFFFF; 
+    }
+    
+    .footer-links { 
+      display: flex; 
+      justify-content: center; 
+      gap: 14px; 
+      margin-bottom: 12px; 
+      flex-wrap: wrap; 
+    }
+    
+    .footer-links a { 
+      color: var(--wb-text-muted); 
+      text-decoration: none; 
+      font-size: 11.5px; 
+      font-weight: 600; 
+    }
+    
+    .copyright-text { 
+      color: var(--wb-text-dim); 
+      font-size: 11px; 
+      line-height: 1.4; 
+    }
+
+    /* PRICING MODAL */
+    .pricing-modal-overlay { 
+      position: fixed; 
+      inset: 0; 
+      background: rgba(3, 7, 18, 0.85); 
+      backdrop-filter: blur(10px); 
+      z-index: 999999999; 
+      display: none; 
+      align-items: flex-start; 
+      justify-content: center; 
+      padding: 20px 16px; 
+      overflow-y: auto; 
+    }
+    
+    .pricing-modal-overlay.active { 
+      display: flex; 
+    }
+    
+    .pricing-modal-content { 
+      background: var(--wb-surface); 
+      border: 1px solid var(--wb-border); 
+      width: 100%; 
+      max-width: 1100px; 
+      border-radius: 24px; 
+      padding: 28px 20px; 
+      margin: auto 0; 
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6); 
+      position: relative; 
+    }
+    
+    .close-modal-btn { 
+      position: absolute; 
+      top: 18px; 
+      right: 18px; 
+      background: var(--wb-card); 
+      border: 1px solid var(--wb-border); 
+      width: 38px; 
+      height: 38px; 
+      border-radius: 12px; 
+      cursor: pointer; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 16px; 
+      color: #FFFFFF; 
+    }
+
+    .pricing-grid { 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 16px; 
+      margin-top: 20px; 
+    }
+    
+    @media (min-width: 600px) { 
+      .pricing-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+      } 
+    }
+    
+    @media (min-width: 1024px) { 
+      .pricing-grid { 
+        grid-template-columns: repeat(3, 1fr); 
+      } 
+    }
+    
+    .pricing-card { 
+      background: var(--wb-card); 
+      border: 1px solid var(--wb-border); 
+      border-radius: 20px; 
+      padding: 22px 18px; 
+      display: flex; 
+      flex-direction: column; 
+      position: relative; 
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); 
+    }
+    
+    .pricing-card.popular { 
+      border-color: var(--wb-accent); 
+      background: rgba(0, 240, 255, 0.04); 
+      box-shadow: 0 15px 35px rgba(0, 240, 255, 0.12); 
+    }
+    
+    .popular-tag { 
+      position: absolute; 
+      top: -10px; 
+      right: 16px; 
+      background: var(--wb-accent); 
+      color: #030712; 
+      font-size: 9px; 
+      font-weight: 800; 
+      padding: 3px 10px; 
+      border-radius: 6px; 
+      text-transform: uppercase; 
+    }
+    
+    .pricing-card h3 { 
+      font-size: 16px; 
+      font-weight: 800; 
+      color: #FFFFFF; 
+    }
+    
+    .pricing-sub { 
+      font-size: 11.5px; 
+      color: var(--wb-text-muted); 
+      margin-top: 2px; 
+      font-weight: 600; 
+    }
+    
+    .price-val { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: 26px; 
+      font-weight: 800; 
+      color: #FFFFFF; 
+      margin: 12px 0 6px; 
+    }
+    
+    .price-val span { 
+      font-size: 11px; 
+      color: var(--wb-text-dim); 
+      font-weight: 600; 
+    }
+    
+    .timing-badge { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 5px; 
+      background: var(--wb-surface); 
+      border: 1px solid var(--wb-border); 
+      padding: 4px 10px; 
+      border-radius: 8px; 
+      font-size: 11px; 
+      font-weight: 700; 
+      color: var(--wb-text); 
+      margin-bottom: 8px; 
+      align-self: flex-start; 
+    }
+    
+    .timing-badge i { 
+      color: var(--wb-accent); 
+    }
+    
+    .royalty-highlight { 
+      display: inline-flex; 
+      align-items: center; 
+      gap: 5px; 
+      align-self: flex-start; 
+      background: rgba(0, 240, 255, 0.1); 
+      border: 1px solid rgba(0, 240, 255, 0.3); 
+      padding: 4px 10px; 
+      border-radius: 8px; 
+      font-size: 11px; 
+      font-weight: 800; 
+      color: var(--wb-accent); 
+      margin-bottom: 14px; 
+    }
+    
+    .pricing-features { 
+      list-style: none; 
+      margin-bottom: 16px; 
+      flex-grow: 1; 
+    }
+    
+    .pricing-features li { 
+      margin-bottom: 8px; 
+      font-size: 12px; 
+      display: flex; 
+      align-items: flex-start; 
+      gap: 7px; 
+      color: var(--wb-text); 
+      line-height: 1.4; 
+      font-weight: 600; 
+    }
+    
+    .pricing-features li i.fa-check { 
+      color: var(--wb-success); 
+      font-size: 11px; 
+      margin-top: 2px; 
+    }
+    
+    .pricing-features li i.fa-bolt { 
+      color: var(--wb-accent); 
+      font-size: 11px; 
+      margin-top: 2px; 
+    }
+    
+    .lifetime-pill { 
+      background: rgba(52, 211, 153, 0.1); 
+      border: 1px solid rgba(52, 211, 153, 0.3); 
+      padding: 6px 10px; 
+      border-radius: 8px; 
+      font-size: 11px; 
+      color: #34D399; 
+      font-weight: 700; 
+      margin-top: 8px; 
+      display: flex; 
+      align-items: center; 
+      gap: 6px; 
+    }
+
+    /* PURCHASE FORM MODAL */
+    .form-modal-overlay { 
+      position: fixed; 
+      inset: 0; 
+      background: rgba(3, 7, 18, 0.85); 
+      backdrop-filter: blur(10px); 
+      z-index: 999999999; 
+      display: none; 
+      align-items: center; 
+      justify-content: center; 
+      padding: 20px 16px; 
+      overflow-y: auto; 
+    }
+    
+    .form-modal-overlay.active { 
+      display: flex; 
+    }
+    
+    .form-modal-content { 
+      background: var(--wb-surface); 
+      border: 1px solid var(--wb-border); 
+      width: 100%; 
+      max-width: 520px; 
+      border-radius: 24px; 
+      padding: 28px 20px; 
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6); 
+      position: relative; 
+    }
+    
+    .form-group { 
+      margin-bottom: 14px; 
+    }
+    
+    .form-group label { 
+      display: block; 
+      font-size: 11.5px; 
+      font-weight: 800; 
+      color: var(--wb-accent); 
+      margin-bottom: 6px; 
+      text-transform: uppercase; 
+    }
+    
+    .form-group input { 
+      width: 100%; 
+      background: var(--wb-card); 
+      border: 1px solid var(--wb-border); 
+      padding: 12px 16px; 
+      border-radius: 12px; 
+      color: #FFFFFF; 
+      font-size: 13.5px; 
+      font-family: inherit; 
+      font-weight: 600; 
+    }
+    
+    .form-group input:focus { 
+      outline: none; 
+      border-color: var(--wb-accent); 
+      box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.2); 
+    }
+    
+    .selected-plan-badge { 
+      background: rgba(0, 240, 255, 0.1); 
+      border: 1px solid rgba(0, 240, 255, 0.3); 
+      color: var(--wb-accent); 
+      padding: 10px 14px; 
+      border-radius: 12px; 
+      font-size: 13px; 
+      font-weight: 800; 
+      margin-bottom: 16px; 
+      text-align: center; 
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="brand-navbar">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo-area">
+        <img src="https://i.ibb.co/0jFbn9b1/logo.png" alt="AD Brothers Logo" class="brand-logo-img">
+        <div class="brand-text-wrap">
+          <div class="brand-name">AD <span>BROTHERS</span> MEDIA GROUP</div>
+          <div class="brand-tag">MUSIC DISTRIBUTION NETWORK</div>
+        </div>
+      </a>
+      
+      <div class="nav-actions">
+        <button type="button" class="menu-toggle-btn" onclick="toggleAdvMenu(true)" aria-label="Open Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- QUICK NAVIGATION OVERLAY DRAWER -->
+  <div class="adv-nav-overlay" id="advNavOverlay">
+    <div class="nav-head-strip">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <img src="https://i.ibb.co/0jFbn9b1/logo.png" alt="Logo" style="height: 28px; width: auto; border-radius: 6px;">
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 800; color: #FFFFFF;">
+          AD <span style="color: var(--wb-accent);">BROTHERS</span> MEDIA GROUP
+        </div>
+      </div>
+      <button type="button" class="close-nav-btn" onclick="toggleAdvMenu(false)">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="nav-sections-grid">
+      <div>
+        <div class="nav-col-title"><i class="fa-solid fa-compass"></i> Quick Navigation & Portal</div>
+        
+        <!-- 1. Home Overview -->
+        <div class="nav-link-item" onclick="navigateToSection('hero')">
+          <i class="fa-solid fa-house"></i> Home Overview
+        </div>
+
+        <!-- 2. Client Login Portal -->
+        <a href="https://ad-brothersmedia-backstage.netlify.app/" target="_blank" class="nav-link-item">
+          <i class="fa-solid fa-user-lock"></i> Client Login Portal
+        </a>
+
+        <!-- 3. Pricing Plans -->
+        <div class="nav-link-item" onclick="toggleAdvMenu(false); togglePricingModal(true);">
+          <i class="fa-solid fa-tags"></i> Pricing Plans (6 Tiers)
+        </div>
+
+        <div class="nav-link-item" onclick="navigateToSection('platforms')"><i class="fa-solid fa-compact-disc"></i> 330+ Global Streaming DSPs</div>
+        <div class="nav-link-item" onclick="navigateToSection('services')"><i class="fa-solid fa-sliders"></i> Enterprise Services</div>
+        <div class="nav-link-item" onclick="navigateToSection('reviews')"><i class="fa-solid fa-star"></i> Industry Reviews</div>
+        <div class="nav-link-item" onclick="navigateToSection('about')"><i class="fa-solid fa-building"></i> About Company & Founder</div>
+      </div>
+    </div>
+
+    <div style="margin-top: auto; padding-top: 10px;">
+      <a href="https://wa.me/917902285927?text=Hi%20AD%20Brothers,%20I%20want%20to%20get%20Music%20Distribution%20Dashboard" target="_blank" class="btn btn-wavbee" style="width: 100%;">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp Direct Desk
+      </a>
+    </div>
+  </div>
+
+  <!-- FLOATING WHATSAPP -->
+  <a href="https://wa.me/917902285927?text=Hello%20AD%20Brothers%20Media%20Group,%20I%20am%20interested%20in%20your%20Music%20Distribution%20Dashboard." class="floating-wa" target="_blank" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <div class="container">
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+      
+      <div class="brand-hero-badge">
+        <i class="fa-solid fa-bolt"></i> Fast Distribution Network
+      </div>
+
+      <h1>Next-Generation Global Music Distribution & Fast Release Infrastructure</h1>
+
+      <!-- SLIDING SERVICES ROTATOR -->
+      <div class="sliding-sub-box">
+        <span>Our Services ➔</span>
+        <div class="sliding-track" id="slidingTrack">
+          <div class="slide-item active">Superfast 12-Hour Release</div>
+          <div class="slide-item">Fastest Song Live Support</div>
+          <div class="slide-item">Sub-Label Management</div>
+          <div class="slide-item">YouTube Content ID & CMS</div>
+          <div class="slide-item">Telecom Caller Tunes (CRBT)</div>
+          <div class="slide-item">Official VEVO Channels</div>
+          <div class="slide-item">330+ Global Streaming DSPs</div>
+        </div>
+      </div>
+
+      <p>
+        Distribute your tracks across 330+ Global Streaming DSPs including Spotify, YouTube Music, Apple Music, and JioSaavn. Keep up to 95% royalties with direct UPI / NEFT payouts. Standard paid delivery in 12 hours (Emergency release available on special priority request).
+      </p>
+
+      <!-- SQUIRCLE AVATARS (2000+ updated) -->
+      <div class="social-proof-strip-large">
+        <div class="avatar-stack-large">
+          <img src="https://i.ibb.co/F47hWPm5/80bb8b3f917483d301eef34c099a7941.jpg" alt="Sumit Sharma">
+          <img src="https://i.ibb.co/jPV1vfSR/3dec0d8c0cd6b38de7c3239fc9d7cc20.jpg" alt="Ritesh Pandey">
+          <img src="https://i.ibb.co/Ld8sB0rv/images-14.jpg" alt="Anjali Tiwari">
+          <img src="https://i.ibb.co/9mrG4P5R/images-13.jpg" alt="Anjali Bharti">
+          <img src="https://i.ibb.co/rRpJrrjC/g9-Bl-Vmu-YOtw-HD-1.jpg" alt="Biraha Artist">
+        </div>
+        <div class="stars-row">
+          <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+          <span class="rating-number">4.8 / 5.0</span>
+        </div>
+        <div class="social-subtext">Trusted by <strong>2000+ Artists, Labels, Studio Owner & Publishers</strong></div>
+      </div>
+
+      <!-- SHIFT CALCULATOR (Red Alert Warning Style + Option C Short Text) -->
+      <div class="delivery-clock-card" id="shiftWidget" style="border-color: rgba(239, 68, 68, 0.5); background: rgba(239, 68, 68, 0.12); color: #FCA5A5;">
+        <span class="status-dot off" id="shiftDot"></span>
+        <span id="shiftText">⚠️ Office Closed ➔ Back Mon @ 10AM</span>
+      </div>
+
+      <!-- METRICS -->
+      <div class="metrics-counter-grid">
+        <div class="metric-chip">
+          <div class="metric-num">12 <span>H</span></div>
+          <div class="metric-lbl">Superfast Delivery</div>
+        </div>
+        <div class="metric-chip">
+          <div class="metric-num">330<span>+</span></div>
+          <div class="metric-lbl">Global Stores</div>
+        </div>
+        <div class="metric-chip">
+          <div class="metric-num">100<span>%</span></div>
+          <div class="metric-lbl">Rights Retained</div>
+        </div>
+      </div>
+
+      <div class="hero-btns">
+        <button type="button" onclick="togglePricingModal(true)" class="btn btn-wavbee">
+          <i class="fa-solid fa-rocket"></i> Activate Dashboard
+        </button>
+        <a href="#platforms" class="btn btn-outline">
+          <i class="fa-solid fa-layer-group"></i> View 330+ Stores
+        </a>
+      </div>
+    </section>
+
+    <!-- TRUST STRIP -->
+    <div class="trust-strip">
+      <div class="trust-item"><i class="fa-solid fa-circle-check"></i> Direct Official Store Delivery</div>
+      <div class="trust-item"><i class="fa-solid fa-circle-check"></i> YouTube CMS Certified</div>
+      <div class="trust-item"><i class="fa-solid fa-circle-check"></i> Official VEVO Partner</div>
+      <div class="trust-item"><i class="fa-solid fa-bolt"></i> 12H Paid Delivery (Fastest Live Support)</div>
+    </div>
+
+    <!-- REGIONAL EXPANSION STRIP -->
+    <div class="market-strip">
+      <div class="market-title"><i class="fa-solid fa-chart-line"></i> AD Brothers Media Network Rapidly Growing In:</div>
+      <div class="region-tags">
+        <span class="region-pill"><i class="fa-solid fa-location-dot"></i> Uttar Pradesh</span>
+        <span class="region-pill"><i class="fa-solid fa-location-dot"></i> Bihar</span>
+        <span class="region-pill"><i class="fa-solid fa-location-dot"></i> Rajasthan</span>
+        <span class="region-pill"><i class="fa-solid fa-location-dot"></i> Haryana</span>
+        <span class="region-pill"><i class="fa-solid fa-location-dot"></i> Punjab</span>
+        <span class="region-pill"><i class="fa-solid fa-location-dot"></i> Maharashtra</span>
+        <span class="region-pill"><i class="fa-solid fa-location-dot"></i> Gujarat</span>
+        <span class="region-pill"><i class="fa-solid fa-location-dot"></i> Kolkata</span>
+      </div>
+    </div>
+
+    <!-- PLATFORMS SLIDER -->
+    <section class="slider-section" id="platforms">
+      <div class="platforms-tagline">Platforms</div>
+      <h2>Spotify, YouTube Music, and 330+ Global Streaming DSPs</h2>
+      <p>Deliver your audio to Spotify, YouTube Music, Instagram, Facebook, Apple Music, JioSaavn, Wynk, TikTok, and more.</p>
+
+      <div class="marquee-wrapper">
+        <div class="marquee-track">
+          <div class="store-badge"><i class="fa-brands fa-spotify"></i> Spotify</div>
+          <div class="store-badge"><i class="fa-brands fa-youtube"></i> YouTube Music</div>
+          <div class="store-badge"><i class="fa-brands fa-apple"></i> Apple Music</div>
+          <div class="store-badge"><i class="fa-brands fa-instagram"></i> Instagram Audio</div>
+          <div class="store-badge"><i class="fa-solid fa-music"></i> JioSaavn</div>
+          <div class="store-badge"><i class="fa-brands fa-tiktok"></i> TikTok</div>
+          <div class="store-badge"><i class="fa-brands fa-amazon"></i> Amazon Music</div>
+          <div class="store-badge"><i class="fa-brands fa-spotify"></i> Spotify</div>
+          <div class="store-badge"><i class="fa-brands fa-youtube"></i> YouTube Music</div>
+          <div class="store-badge"><i class="fa-brands fa-apple"></i> Apple Music</div>
+          <div class="store-badge"><i class="fa-brands fa-instagram"></i> Instagram Audio</div>
+          <div class="store-badge"><i class="fa-solid fa-music"></i> JioSaavn</div>
+          <div class="store-badge"><i class="fa-brands fa-tiktok"></i> TikTok</div>
+          <div class="store-badge"><i class="fa-brands fa-amazon"></i> Amazon Music</div>
+        </div>
+
+        <div class="marquee-track reverse">
+          <div class="store-badge"><i class="fa-solid fa-tower-broadcast"></i> Wynk Music</div>
+          <div class="store-badge"><i class="fa-solid fa-radio"></i> Gaana</div>
+          <div class="store-badge"><i class="fa-solid fa-headphones"></i> TIDAL</div>
+          <div class="store-badge"><i class="fa-solid fa-cloud-arrow-up"></i> Deezer</div>
+          <div class="store-badge"><i class="fa-solid fa-compact-disc"></i> Shazam</div>
+          <div class="store-badge"><i class="fa-solid fa-tv"></i> VEVO Channels</div>
+          <div class="store-badge"><i class="fa-solid fa-tower-broadcast"></i> Wynk Music</div>
+          <div class="store-badge"><i class="fa-solid fa-radio"></i> Gaana</div>
+          <div class="store-badge"><i class="fa-solid fa-headphones"></i> TIDAL</div>
+          <div class="store-badge"><i class="fa-solid fa-cloud-arrow-up"></i> Deezer</div>
+          <div class="store-badge"><i class="fa-solid fa-compact-disc"></i> Shazam</div>
+          <div class="store-badge"><i class="fa-solid fa-tv"></i> VEVO Channels</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ENTERPRISE SERVICES -->
+    <section id="services">
+      <div class="section-title">
+        <h2>Enterprise Services</h2>
+        <p>Built-in digital rights management, superfast delivery, and global distribution infrastructure.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="icon-box"><i class="fa-solid fa-network-wired"></i></div>
+          <h3>Multiple Record Labels & Sub-Label Management</h3>
+          <p>Create and run separate sub-labels for your clients, artists, and music producers with individual dashboard logins and complete ownership control.</p>
+          <ul class="service-detail-list">
+            <li><i class="fa-solid fa-circle-check"></i> Dedicated sub-label branding & client login</li>
+            <li><i class="fa-solid fa-circle-check"></i> Independent artist & track management</li>
+            <li><i class="fa-solid fa-circle-check"></i> Transparent revenue & royalty reports</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
+          <h3>Superfast 12-Hour Delivery</h3>
+          <p>Get your tracks delivered to top platforms within 12 hours (Special urgent release available via support team chat).</p>
+          <ul class="service-detail-list">
+            <li><i class="fa-solid fa-circle-check"></i> Priority audio & artwork approval</li>
+            <li><i class="fa-solid fa-circle-check"></i> Direct delivery to Spotify, Apple & JioSaavn</li>
+            <li><i class="fa-solid fa-circle-check"></i> Full release support with zero rejection assist</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box"><i class="fa-solid fa-tv"></i></div>
+          <h3>Official VEVO Distribution</h3>
+          <p>Establish high-tier visibility by launching verified VEVO artist channels for music videos.</p>
+          <ul class="service-detail-list">
+            <li><i class="fa-solid fa-circle-check"></i> Verified 'ArtistNameVEVO' channel setup</li>
+            <li><i class="fa-solid fa-circle-check"></i> 4K / Full HD high-quality video delivery</li>
+            <li><i class="fa-solid fa-circle-check"></i> Global monetization via VEVO video ad network</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box"><i class="fa-brands fa-youtube"></i></div>
+          <h3>YouTube Content ID & CMS</h3>
+          <p>Protect and monetize your audio across user-generated videos everywhere on YouTube automatically.</p>
+          <ul class="service-detail-list">
+            <li><i class="fa-solid fa-circle-check"></i> Automatic audio fingerprinting and claims</li>
+            <li><i class="fa-solid fa-circle-check"></i> Integrated dispute clearance management</li>
+            <li><i class="fa-solid fa-circle-check"></i> Channel whitelisting permissions</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box"><i class="fa-solid fa-phone-volume"></i></div>
+          <h3>Telecom Caller Tunes (CRBT)</h3>
+          <p>Deliver your audio tracks directly to top telecom networks for dialer tune personalization.</p>
+          <ul class="service-detail-list">
+            <li><i class="fa-solid fa-circle-check"></i> Jio Tunes & Airtel Wynk direct delivery</li>
+            <li><i class="fa-solid fa-circle-check"></i> Full Vodafone-Idea (Vi) compatibility</li>
+            <li><i class="fa-solid fa-circle-check"></i> Direct dialing codes & SMS shortcuts</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="icon-box"><i class="fa-solid fa-circle-check"></i></div>
+          <h3>Official Artist Channel (OAC)</h3>
+          <p>Upgrade standard YouTube channels to Official Artist Channels with the verified music note badge.</p>
+          <ul class="service-detail-list">
+            <li><i class="fa-solid fa-circle-check"></i> YouTube OAC verification support</li>
+            <li><i class="fa-solid fa-circle-check"></i> Automatic topic channel discography merge</li>
+            <li><i class="fa-solid fa-circle-check"></i> Enhanced artist profile presentation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- INDUSTRY REVIEWS -->
+    <section id="reviews" class="reviews-section">
+      <div class="section-title">
+        <h2>Industry Endorsements</h2>
+        <p>Trusted across regional music industries, independent studios, and publishing houses</p>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-header">
+            <img src="https://i.ibb.co/9mrG4P5R/images-13.jpg" alt="Anjali Bharti">
+            <div>
+              <h4>Anjali Bharti</h4>
+              <span class="client-role">Bhojpuri Singer (Patna, Bihar)</span>
+            </div>
+          </div>
+          <div class="rating-tag">
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+            <span>4.8 / 5.0</span>
+          </div>
+          <p>"Regional artists ke liye sabse trusted partner! Normal release 12 hours me aur urgent request par fastest live delivery mil jati hai."</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <img src="https://i.ibb.co/Ld8sB0rv/images-14.jpg" alt="Anjali Tiwari">
+            <div>
+              <h4>Anjali Tiwari</h4>
+              <span class="client-role">Bhojpuri Singer</span>
+            </div>
+          </div>
+          <div class="rating-tag">
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+            <span>4.7 / 5.0</span>
+          </div>
+          <p>"Smooth dashboard aur transparent working system. Content ID claiming se lekar payouts tak, inke working flow par pura bharosa kiya ja sakta hai."</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <img src="https://i.ibb.co/jPV1vfSR/3dec0d8c0cd6b38de7c3239fc9d7cc20.jpg" alt="Ritesh Pandey">
+            <div>
+              <h4>Ritesh Pandey</h4>
+              <span class="client-role">Digital CMS & Distribution Partner (Haryana / Punjab)</span>
+            </div>
+          </div>
+          <div class="rating-tag">
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            <span>4.9 / 5.0</span>
+          </div>
+          <p>"Main AD Brothers Media ke sath milkar Digital Distribution aur CMS ka kaam karta hoon. Mere paas abhi 35+ active artists hain."</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <img src="https://i.ibb.co/F47hWPm5/80bb8b3f917483d301eef34c099a7941.jpg" alt="Sumit Sharma">
+            <div>
+              <h4>Sumit Sharma</h4>
+              <span class="client-role">Music Publisher & Label Coordinator (Jaipur)</span>
+            </div>
+          </div>
+          <div class="rating-tag">
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+            <span>4.8 / 5.0</span>
+          </div>
+          <p>"As a publisher, direct platform delivery aur automatic YouTube audio claiming se hamara regional music catalog streamline ho gaya hai."</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <img src="https://i.ibb.co/1HQ608X/200fbbe44efbb327ca585906eb52ed58.jpg" alt="Vikas Kashyap">
+            <div>
+              <h4>Vikas Kashyap</h4>
+              <span class="client-role">Artist Operations (Mumbai, Maharashtra)</span>
+            </div>
+          </div>
+          <div class="rating-tag">
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+            <span>4.8 / 5.0</span>
+          </div>
+          <p>"Maharashtra aur Gujarat belt ke independent artists aur multiple regional singers ka catalog yahan se manage hota hai."</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-header">
+            <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=150&auto=format&fit=crop&q=80" alt="Rajesh Verma">
+            <div>
+              <h4>Rajesh Verma</h4>
+              <span class="client-role">Senior Sound Engineer (Varanasi, UP)</span>
+            </div>
+          </div>
+          <div class="rating-tag">
+            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+            <span>4.9 / 5.0</span>
+          </div>
+          <p>"Hamare studio se daily regional recordings direct dispatch hoti hain bina kisi audio quality loss ke. Best distribution network!"</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+      <div class="about-wrap">
+        <div>
+          <span class="abt-badge">Company Infrastructure</span>
+          <h2>About AD Brothers Media Group</h2>
+          <p>AD Brothers Media Group is a digital technology and media enterprise providing digital music distribution, rights monetization, and studio infrastructure across regional and mainstream territories.</p>
+          <p>Our core mission is to equip indie artists, audio creators, and record labels with reliable royalty reporting, fast delivery systems, and full ownership guarantees.</p>
+        </div>
+
+        <div class="founder-box" id="founder">
+          <span class="founder-badge"><i class="fa-solid fa-award"></i> Leadership</span>
+          <div class="founder-name">Anurag AD</div>
+          <div class="founder-title">Founder & CEO, AD Brothers Media Group</div>
+          <p class="founder-desc">Anurag AD is an entrepreneur and <strong>IFTA Certified Filmmaker</strong>. With extensive background across media production, YouTube CMS management, and streaming rights distribution.</p>
+          
+          <div class="founder-quote-box">
+            <i class="fa-solid fa-quote-left"></i> "We don't just distribute your music — we give singers, labels, and publishers the global stage to grow and dominate worldwide."
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <div class="cta-banner" id="contact">
+      <h2>Launch Your Distribution Portal Today</h2>
+      <p>Whether beginning with our Starting Artist tier or scaling your own Superfast Sub-Label Dashboard, our team is ready to assist your onboarding.</p>
+      <a href="https://wa.me/917902285927?text=Hello%20Anurag%20Sir,%20I%20am%20ready%20to%20start%20with%20AD%20Brothers%20Media%20Group." target="_blank" class="btn btn-wavbee">
+        <i class="fa-brands fa-whatsapp"></i> Direct WhatsApp Connect
+      </a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-brand">
+        <img src="https://i.ibb.co/0jFbn9b1/logo.png" alt="Logo" style="height: 24px; width: auto; border-radius: 6px;">
+        <span>AD BROTHERS MEDIA GROUP</span>
+      </div>
+      <div class="footer-links">
+        <a href="#hero">Home</a>
+        <a href="#platforms">Platforms</a>
+        <a href="javascript:void(0)" onclick="togglePricingModal(true)">Pricing</a>
+        <a href="#services">Services</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#about">About</a>
+        <a href="https://ad-brothersmedia-backstage.netlify.app/" target="_blank">Client Login</a>
+      </div>
+      <p class="copyright-text">
+        © 2026 AD Brothers Media Group. All rights reserved. <br>
+        Direct Desk: +91 7902285927
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- POPUP PRICING MODAL -->
+  <div class="pricing-modal-overlay" id="pricingModal">
+    <div class="pricing-modal-content">
+      <button type="button" class="close-modal-btn" onclick="togglePricingModal(false)" aria-label="Close Pricing">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="section-title">
+        <h2>Transparent Pricing Plans</h2>
+        <p>No hidden deductions. Select your 1-Year or Lifetime Setup plan.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- PLAN 1 -->
+        <div class="pricing-card">
+          <h3>Free Emerging</h3>
+          <div class="pricing-sub">For new solo creators</div>
+          <div class="price-val">₹0 <span>/ Free Forever</span></div>
+          <div class="timing-badge"><i class="fa-solid fa-clock"></i> 2–6 Days Delivery</div>
+          <div class="royalty-highlight"><i class="fa-solid fa-percent"></i> 70% Royalty Payout</div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-check"></i> 1 Primary Artist Profile</li>
+            <li><i class="fa-solid fa-check"></i> 150+ Global Stores</li>
+            <li><i class="fa-solid fa-check"></i> Standard Quality Check</li>
+            <li><i class="fa-solid fa-check"></i> Free ISRC & UPC Codes</li>
+            <li class="lifetime-pill"><i class="fa-solid fa-infinity"></i> Songs Stay Live Permanently</li>
+          </ul>
+          <button type="button" onclick="openPurchaseForm('Free Emerging (₹0 / Free Forever)')" class="btn btn-outline" style="width: 100%;">Start Free</button>
+        </div>
+
+        <!-- PLAN 2 (Updated to ₹999) -->
+        <div class="pricing-card">
+          <h3>Starting Artist Plan</h3>
+          <div class="pricing-sub">For solo indie artists & singers</div>
+          <div class="price-val">₹999 <span>/ 1 Year Plan</span></div>
+          <div class="timing-badge"><i class="fa-solid fa-clock"></i> 24–48 Hours Timing</div>
+          <div class="royalty-highlight"><i class="fa-solid fa-percent"></i> 70% Revenue Share</div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-bolt"></i> <strong>330+ Global Streaming DSPs</strong></li>
+            <li><i class="fa-solid fa-check"></i> 24–48 Hours Song Delivery</li>
+            <li><i class="fa-solid fa-check"></i> 1 Primary Artist Profile</li>
+            <li><i class="fa-solid fa-check"></i> Jio, Airtel Caller Tunes (CRBT)</li>
+            <li><i class="fa-solid fa-check"></i> YouTube Audio Content ID</li>
+            <li><i class="fa-solid fa-check"></i> VEVO Video Distribution Access</li>
+            <li><i class="fa-solid fa-check"></i> <strong>Custom C-Line & P-Line Support</strong></li>
+            <li class="lifetime-pill"><i class="fa-solid fa-infinity"></i> Songs Stay Live Permanently</li>
+          </ul>
+          <button type="button" onclick="openPurchaseForm('Starting Artist Plan (₹999 / 1 Year)')" class="btn btn-outline" style="width: 100%;">Choose Artist Plan</button>
+        </div>
+
+        <!-- PLAN 3 (Updated to ₹1,999) -->
+        <div class="pricing-card">
+          <h3>Starting Label Plan</h3>
+          <div class="pricing-sub">For emerging record labels</div>
+          <div class="price-val">₹1,999 <span>/ 1 Year Plan</span></div>
+          <div class="timing-badge"><i class="fa-solid fa-clock"></i> 24–48 Hours Timing</div>
+          <div class="royalty-highlight"><i class="fa-solid fa-percent"></i> 70% Revenue Share</div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-bolt"></i> <strong>330+ Global Streaming DSPs</strong></li>
+            <li><i class="fa-solid fa-check"></i> Sub-Label Creation Feature</li>
+            <li><i class="fa-solid fa-check"></i> Unlimited Releases & Artists</li>
+            <li><i class="fa-solid fa-check"></i> Full CRBT Telecom Delivery</li>
+            <li><i class="fa-solid fa-check"></i> VEVO Video Distribution Access</li>
+            <li><i class="fa-solid fa-check"></i> <strong>Custom C-Line & P-Line Support</strong></li>
+            <li class="lifetime-pill"><i class="fa-solid fa-infinity"></i> Lifetime Catalog Guarantee</li>
+          </ul>
+          <button type="button" onclick="openPurchaseForm('Starting Label Plan (₹1,999 / 1 Year)')" class="btn btn-outline" style="width: 100%;">Choose Label Plan</button>
+        </div>
+
+        <!-- PLAN 4 (POPULAR) -->
+        <div class="pricing-card popular">
+          <div class="popular-tag">Popular</div>
+          <h3>Single Label Pro</h3>
+          <div class="pricing-sub">For established record labels</div>
+          <div class="price-val">₹3,999 <span>/ 1 Year Plan</span></div>
+          <div class="timing-badge"><i class="fa-solid fa-bolt"></i> Fastest 12H Live</div>
+          <div class="royalty-highlight"><i class="fa-solid fa-percent"></i> 85% Royalty Payout</div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-bolt"></i> <strong>Fastest 12H Live (Urgent Support)</strong></li>
+            <li><i class="fa-solid fa-check"></i> Multiple Sub-Label Management</li>
+            <li><i class="fa-solid fa-check"></i> Unlimited Releases (1 Year)</li>
+            <li><i class="fa-solid fa-check"></i> Official Artist Channel (OAC)</li>
+            <li><i class="fa-solid fa-check"></i> VEVO Video Distribution Access</li>
+            <li><i class="fa-solid fa-check"></i> <strong>Custom C-Line & P-Line Support</strong></li>
+            <li class="lifetime-pill"><i class="fa-solid fa-infinity"></i> Songs Stay Live Forever</li>
+          </ul>
+          <button type="button" onclick="openPurchaseForm('Single Label Pro (₹3,999 / 1 Year)')" class="btn btn-wavbee" style="width: 100%;">Choose Single Label</button>
+        </div>
+
+        <!-- PLAN 5 -->
+        <div class="pricing-card">
+          <h3>Enterprise Portal</h3>
+          <div class="pricing-sub">For distributors & agents</div>
+          <div class="price-val">₹11,999 <span>/ Lifetime Setup</span></div>
+          <div class="timing-badge"><i class="fa-solid fa-bolt"></i> Fastest Priority Live</div>
+          <div class="royalty-highlight"><i class="fa-solid fa-percent"></i> 90% Royalty Payout</div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-bolt"></i> <strong>Fastest Priority Live</strong></li>
+            <li><i class="fa-solid fa-check"></i> Unlimited Multiple Sub-Labels</li>
+            <li><i class="fa-solid fa-check"></i> VEVO Video Distribution Access</li>
+            <li><i class="fa-solid fa-check"></i> Direct YouTube Claim Release</li>
+            <li><i class="fa-solid fa-check"></i> <strong>Custom C-Line & P-Line Support</strong></li>
+            <li class="lifetime-pill"><i class="fa-solid fa-infinity"></i> Permanent Catalog Guarantee</li>
+          </ul>
+          <button type="button" onclick="openPurchaseForm('Enterprise Portal (₹11,999 / Lifetime)')" class="btn btn-outline" style="width: 100%;">Get Dashboard</button>
+        </div>
+
+        <!-- PLAN 6 -->
+        <div class="pricing-card">
+          <h3>MCN / CMS Master</h3>
+          <div class="pricing-sub">For studios & media networks</div>
+          <div class="price-val">₹24,999 <span>/ Full Setup</span></div>
+          <div class="timing-badge"><i class="fa-solid fa-bolt"></i> Fastest Priority Release</div>
+          <div class="royalty-highlight"><i class="fa-solid fa-percent"></i> 95% Royalty Payout</div>
+          <ul class="pricing-features">
+            <li><i class="fa-solid fa-bolt"></i> <strong>Superfast Delivery</strong></li>
+            <li><i class="fa-solid fa-check"></i> 330+ Stores + Dedicated CMS</li>
+            <li><i class="fa-solid fa-check"></i> White-Label Custom Domain</li>
+            <li><i class="fa-solid fa-check"></i> Unlimited VEVO Channels Access</li>
+            <li><i class="fa-solid fa-check"></i> <strong>Custom C-Line & P-Line Support</strong></li>
+            <li class="lifetime-pill"><i class="fa-solid fa-infinity"></i> Permanent Catalog</li>
+          </ul>
+          <button type="button" onclick="openPurchaseForm('MCN / CMS Master (₹24,999 / Full Setup)')" class="btn btn-outline" style="width: 100%;">Contact Master</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PURCHASE FORM POPUP MODAL -->
+  <div class="form-modal-overlay" id="purchaseFormModal">
+    <div class="form-modal-content">
+      <button type="button" class="close-modal-btn" onclick="togglePurchaseForm(false)">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="section-title" style="margin-bottom: 14px;">
+        <h2>Complete Registration</h2>
+        <p>Fill in your details to process your plan activation.</p>
+      </div>
+
+      <div class="selected-plan-badge" id="displaySelectedPlan">Selected Plan: None</div>
+
+      <form id="waPurchaseForm" onsubmit="sendDataToWhatsApp(event)">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="pName" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label>Artist / Label Name</label>
+          <input type="text" id="pLabel" placeholder="Enter artist or record label name" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="pPhone" placeholder="Enter phone number" required>
+        </div>
+        <div class="form-group">
+          <label>WhatsApp Number</label>
+          <input type="tel" id="pWhatsApp" placeholder="Enter WhatsApp number" required>
+        </div>
+        <div class="form-group">
+          <label>YouTube Channel Link</label>
+          <input type="url" id="pYoutube" placeholder="https://youtube.com/@channel" required>
+        </div>
+        <div class="form-group">
+          <label>Email ID</label>
+          <input type="email" id="pEmail" placeholder="Enter email address" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="pPassword" placeholder="Create a password" required>
+        </div>
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" id="pConfirmPassword" placeholder="Confirm your password" required>
+        </div>
+
+        <button type="submit" class="btn btn-wavbee" style="width: 100%; margin-top: 6px;">
+          <i class="fa-brands fa-whatsapp"></i> Submit & Send to WhatsApp
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let activePlanName = "";
+
+    function toggleAdvMenu(open) {
+      const overlay = document.getElementById('advNavOverlay');
+      if (open) {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    function togglePricingModal(open) {
+      const modal = document.getElementById('pricingModal');
+      if (open) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    function openPurchaseForm(planName) {
+      activePlanName = planName;
+      document.getElementById('displaySelectedPlan').textContent = "Selected Plan: " + planName;
+      togglePricingModal(false);
+      const formModal = document.getElementById('purchaseFormModal');
+      formModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function togglePurchaseForm(open) {
+      const modal = document.getElementById('purchaseFormModal');
+      if (open) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    window.addEventListener('click', function(e) {
+      const modal = document.getElementById('pricingModal');
+      const formModal = document.getElementById('purchaseFormModal');
+      if (e.target === modal) {
+        togglePricingModal(false);
+      }
+      if (e.target === formModal) {
+        togglePurchaseForm(false);
+      }
+    });
+
+    function navigateToSection(targetId) {
+      toggleAdvMenu(false);
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          const navOffset = 68;
+          const pos = el.getBoundingClientRect().top + window.pageYOffset - navOffset;
+          window.scrollTo({ top: pos, behavior: 'smooth' });
+        }
+      }, 50);
+    }
+
+    function sendDataToWhatsApp(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('pName').value.trim();
+      const label = document.getElementById('pLabel').value.trim();
+      const phone = document.getElementById('pPhone').value.trim();
+      const whatsapp = document.getElementById('pWhatsApp').value.trim();
+      const youtube = document.getElementById('pYoutube').value.trim();
+      const email = document.getElementById('pEmail').value.trim();
+      const password = document.getElementById('pPassword').value.trim();
+      const confirmPassword = document.getElementById('pConfirmPassword').value.trim();
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match! Please check and re-enter.");
+        return;
+      }
+
+      const message = `*New Plan Purchase / Registration Request*\n\n` +
+                      `📌 *Selected Plan:* ${activePlanName}\n` +
+                      `👤 *Name:* ${name}\n` +
+                      `🏷️ *Artist / Label Name:* ${label}\n` +
+                      `📞 *Phone Number:* ${phone}\n` +
+                      `📱 *WhatsApp Number:* ${whatsapp}\n` +
+                      `🔗 *YouTube Channel:* ${youtube}\n` +
+                      `📧 *Email ID:* ${email}\n` +
+                      `🔑 *Password:* ${password}`;
+
+      const encodedMessage = encodeURIComponent(message);
+      const targetWhatsAppUrl = `https://wa.me/917902285927?text=${encodedMessage}`;
+
+      window.open(targetWhatsAppUrl, '_blank');
+      togglePurchaseForm(false);
+    }
+
+    // SLIDING ANIMATION LOGIC FOR SERVICES
+    const slideItems = document.querySelectorAll('.slide-item');
+    let currentSlide = 0;
+
+    if (slideItems.length > 0) {
+      setInterval(() => {
+        slideItems[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slideItems.length;
+        slideItems[currentSlide].classList.add('active');
+      }, 2500);
+    }
+
+    // SHIFT STATUS LOGIC (MON-FRI WORKING HOURS WITH OPTION C SHORT TEXT)
+    function checkShiftStatus() {
+      try {
+        const now = new Date();
+        const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
+        const istDate = new Date(utcTime + (3600000 * 5.5));
+
+        const day = istDate.getDay(); 
+        const hour = istDate.getHours();
+        const min = istDate.getMinutes();
+        const timeVal = hour + (min / 60);
+
+        const isWeekday = day >= 1 && day <= 5; 
+        const isOpen = isWeekday && (timeVal >= 10.0 && timeVal < 16.0);
+
+        const widget = document.getElementById('shiftWidget');
+        const dot = document.getElementById('shiftDot');
+        const text = document.getElementById('shiftText');
+
+        if (!dot || !text || !widget) return;
+
+        if (day === 0 || day === 6) {
+          // Weekend Alert Style
+          widget.style.background = "rgba(239, 68, 68, 0.12)";
+          widget.style.borderColor = "rgba(239, 68, 68, 0.5)";
+          widget.style.color = "#FCA5A5";
+          dot.className = "status-dot off";
+          text.innerHTML = `⚠️ Office Closed ➔ Back Mon @ 10AM`;
+        } else if (isOpen) {
+          // Open Working Hours
+          widget.style.background = "rgba(0, 240, 255, 0.08)";
+          widget.style.borderColor = "rgba(0, 240, 255, 0.3)";
+          widget.style.color = "#38BDF8";
+          dot.className = "status-dot";
+          const target12 = new Date(istDate.getTime() + (12 * 60 * 60 * 1000));
+          const targetStr12 = target12.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+          text.innerHTML = `Upload Your Song Today ➔ Live in ${targetStr12} (⚡ Fastest Song Live)`;
+        } else {
+          // Weekday Off Hours Alert Style
+          widget.style.background = "rgba(239, 68, 68, 0.12)";
+          widget.style.borderColor = "rgba(239, 68, 68, 0.5)";
+          widget.style.color = "#FCA5A5";
+          dot.className = "status-dot off";
+          text.innerHTML = `⚠️ Window Closed ➔ Next Shift: 10AM IST`;
+        }
+      } catch (err) {
+        console.error("Shift status error:", err);
+      }
+    }
+    checkShiftStatus();
+    setInterval(checkShiftStatus, 60000);
+  </script>
+</body>
+</html>
